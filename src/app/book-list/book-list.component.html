@@ -1,0 +1,12 @@
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="SearchElement">Search:</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+            <select name="CategoryCheckbox" id="">
+                <option *ngFor="let category of categories" value="{{category}}" ></option>
+            </select>
+            <input type="submit" class="btn btn-submit" />
+          </div>
+    </form>
+</div>
