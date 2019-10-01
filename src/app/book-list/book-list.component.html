@@ -1,12 +1,52 @@
 <div class="container">
     <form>
-        <div class="form-group">
+        <div class="form-group" class="searchForm">
             <label for="SearchElement">Search:</label>
             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
-            <select name="CategoryCheckbox" id="">
-                <option *ngFor="let category of categories" value="{{category}}" ></option>
+            <p>I am book</p>
+            <select class="form-control" name="CategoryCheckbox" id="">
+                <option *ngFor="let category of categories" [value]="category" > {{ category }} </option>
             </select>
-            <input type="submit" class="btn btn-submit" />
+            <input class="form-control" type="submit" class="btn btn-primary" />
           </div>
     </form>
 </div>
+
+<data-table 
+[items]="items"
+[itemCount]="itemCount">
+<data-table-column
+  [property] = "'title'"
+  [header] = "'Title'"
+  [sortable] = "true"
+  [resizable] = "true"
+></data-table-column>
+<data-table-column
+  [property] = "'subjects'"
+  [header] = "'Subjects'"
+  [sortable] = "true"
+  [resizable] = "true"
+></data-table-column>
+<data-table-column
+  [property] = "'type'"
+  [header] = "'Type'"
+  [sortable] = "true"
+  [resizable] = "true"
+></data-table-column>
+<data-table-column
+  [property] = "'bib_num'"
+  [header] = "'Bib_num'"
+  [sortable] = "true"
+  [resizable] = "true"
+></data-table-column>
+<!-- <ng-template #dataTableCell let-item="item">
+  {{item.price | currency:'USD':'symbol'}}
+</ng-template>
+</data-table-column>
+<data-table-column
+  [property] = "'$key'"
+>
+<ng-template #dataTableCell let-item="item">
+  <a [routerLink]="['/admin/products/', item.$key]">Edit</a>
+</ng-template> -->
+</data-table>

@@ -10,6 +10,7 @@ import { ReturnComponentComponent } from './return-component/return-component.co
 import { HomeComponent } from './home/home.component';
 import { FakeBookProvider } from './fakeBook.service';
 import { BookServiceService } from './book-service.service';
+import { DataTableModule } from 'angular5-data-table';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
@@ -27,6 +28,7 @@ import { HttpModule } from '@angular/http';
     NgbModule,
     HttpClientModule,
     HttpModule,
+    DataTableModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'books', component: BookListComponent},

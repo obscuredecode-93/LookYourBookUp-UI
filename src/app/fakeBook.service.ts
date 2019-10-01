@@ -7,19 +7,19 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 let books =  [
     {
         "title": "title1",
-        "subjects": ["subjects of 1", "all subjects1"],
+        "subjects": "subjects of 1,all subjects1",
         "type": "book",
         "bib_num": "bibnum1"
     },
     {
         "title": "title2",
-        "subjects": ["subjects of 2", "all subjects2"],
+        "subjects": "subjects of 2 , all subjects2",
         "type": "cd",
         "bib_num": "bibnum2"
     },
     {
         "title": "title3",
-        "subjects": ["subjects of 3", "all subjects3"],
+        "subjects": "subjects of 3,all subjects3",
         "type": "cd",
         "bib_num": "bibnum3"
     }
@@ -67,9 +67,13 @@ export class FakeBookService implements HttpInterceptor {
         function getAllBookTypes(){
             return ok(categories);
         }
+        function get(){
+            return ok(categories);
+        }
         function getListOfCategories(){
             return ok()
         }
+
 
         // helper functions
 
@@ -87,11 +91,6 @@ export class FakeBookService implements HttpInterceptor {
 
         function isLoggedIn() {
             return headers.get('Authorization') === 'Bearer fake-jwt-token';
-        }
-
-        function idFromUrl() {
-            const urlParts = url.split('/');
-            return parseInt(urlParts[urlParts.length - 1]);
         }
     }
 }

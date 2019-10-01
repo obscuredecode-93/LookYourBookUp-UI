@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookServiceService } from '../book-service.service';
-import { DataTableModule } from 'angular5-data-table';
+import { DataTableResource } from 'angular5-data-table';
+import { Book } from '../models/Book';
 
 @Component({
   selector: 'app-book-list',
@@ -9,25 +10,38 @@ import { DataTableModule } from 'angular5-data-table';
 })
 export class BookListComponent {
 
-  books = []
+  books : Book[];
+  tableResource: DataTableResource<Book>;
+  categories = [];
+  items: Book[] = [];
+  itemCount: number;
   constructor(private booksService: BookServiceService) {
     this.displayBooks(); 
     this.populateCategoryDropDown();
   }
-  displayBooks(){
-    this.booksService.getAll().subscribe(response => {
-      response.forEach((data) => {
-        console.log(data)
-      });
+  async displayBooks(){
+    await this.booksService.getAll().subscribe(response => {
+      this.books = response;
+      this.initializeTable(this.books);
     },
     error => console.log(error));
   }
 
   populateCategoryDropDown(){
     this.booksService.getAllCategories().subscribe(response => {
-      response.forEach((data) => console.log(data))
+      response.forEach(category => this.categories.push(category));
+      console.log(this.categories);
     })
   }
+
+  private initializeTable(books: Book[]){
+    this.tableResource = new DataTableResource(books);
+    console.log(books);
+    this.tableResource.query({ offset: 0 })
+    .then(items => this.items = items);
+    this.tableResource.count()
+     .then(count => this.itemCount = count);
+   }
 
 
 }
