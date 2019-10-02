@@ -1,0 +1,100 @@
+<div class="container">
+    <h1>{{ (book$| async).title }}</h1>
+    <p>{{ (book$ | async).subjects }}></p>
+    <p>{{ (book$ | async).type }}></p>
+    <p>{{ (book$ | async).bib_num }}></p>
+</div>
+
+<h1>Condition:</h1>
+<div class="container">
+    <data-table 
+    [items]="items"
+    [itemCount]="itemCount">
+    <data-table-column
+      [property] = "'barcode'"
+      [header] = "'Barcode'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'bibNum'"
+      [header] = "'bibNum'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'bookCondition'"
+      [header] = "'bookCondition'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+    [property] = "'userId'"
+    [header] = "'userId'"
+    [sortable] = "true"
+    [resizable] = "true"
+  ></data-table-column>
+    <!-- <data-table-column
+      [property] = "'bib_num'"
+      [header] = "'Bib_num'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column> -->
+    </data-table>
+</div>
+
+<hr/>
+<div class="container">
+    <data-table 
+    [items]="reviewItems"
+    [itemCount]="reviewItemCount">
+    <data-table-column
+      [property] = "'reviewId'"
+      [header] = "'reviewId'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'userId'"
+      [header] = "'userId'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'bibNum'"
+      [header] = "'bibNum'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+    [property] = "'reviewHeading'"
+    [header] = "'reviewHeading'"
+    [sortable] = "true"
+    [resizable] = "true"
+  ></data-table-column>
+  <data-table-column
+    [property] = "'reviewRating'"
+    [header] = "'reviewRating'"
+    [sortable] = "true"
+    [resizable] = "true"
+  ></data-table-column>
+  <data-table-column
+    [property] = "'reviewDescription'"
+    [header] = "'reviewDescription'"
+    [sortable] = "true"
+    [resizable] = "true"
+  ></data-table-column>
+  <data-table-column
+  [property] = "'recommend'"
+  [header] = "'recommend'"
+  [sortable] = "true"
+  [resizable] = "true"
+></data-table-column>
+    <!-- <data-table-column
+      [property] = "'bib_num'"
+      [header] = "'Bib_num'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column> -->
+    </data-table>
+</div>

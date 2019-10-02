@@ -33,12 +33,18 @@
   [sortable] = "true"
   [resizable] = "true"
 ></data-table-column>
-<data-table-column
+<!-- <data-table-column
   [property] = "'bib_num'"
   [header] = "'Bib_num'"
   [sortable] = "true"
   [resizable] = "true"
-></data-table-column>
+></data-table-column> -->
+<data-table-column
+[property]="'bib_num'">
+    <ng-template #dataTableCell let-item="item">
+        <a [routerLink]="['/books/getDetails/', item.bib_num]">{{ item.bib_num }}</a>
+    </ng-template>
+</data-table-column>
 <!-- <ng-template #dataTableCell let-item="item">
   {{item.price | currency:'USD':'symbol'}}
 </ng-template>

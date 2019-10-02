@@ -31,7 +31,81 @@ let categories = [
     "cd-rom",
     "cd"
 ]
-
+let condition = 
+    [
+        {
+            "barcode": "barcode1",
+            "bibNum": "bibnum1",
+            "bookCondition":   4,
+            "userId": "user1"
+        },
+        {
+            "barcode": "barcode14",
+            "bibNum": "bibnum1",
+            "bookCondition": 2,
+            "userId": "user4"
+        },
+        {
+            "barcode": "barcode14",
+            "bibNum": "bibnum2",
+            "bookCondition": 3,
+            "userId": "user4"
+        },
+        {
+            "barcode": "barcode14",
+            "bibNum": "bibnum3",
+            "bookCondition": 3,
+            "userId": "user4"
+        }
+    ]
+    let reviews = [
+        {
+            "reviewId": 1,
+            "userId": "user4",
+            "bibNum": "bibnum3",
+            "reviewHeading": "good book",
+            "reviewRating": 4,
+            "reviewDescription": "rev des 1",
+            "recommend": "yes"
+        },
+        {
+            "reviewId": 1,
+            "userId": "user4",
+            "bibNum": "bibnum3",
+            "reviewHeading": "good book",
+            "reviewRating": 4,
+            "reviewDescription": "rev des 1",
+            "recommend": "yes"
+        },
+        {
+            "reviewId": 1,
+            "userId": "user2",
+            "bibNum": "bibnum2",
+            "reviewHeading": "good book",
+            "reviewRating": 4,
+            "reviewDescription": "rev des 1",
+            "recommend": "yes"
+        },
+        {
+            "reviewId": 1,
+            "userId": "user1",
+            "bibNum": "bibnum1",
+            "reviewHeading": "good book",
+            "reviewRating": 4,
+            "reviewDescription": "rev des 1",
+            "recommend": "yes"
+        },
+        {
+            "reviewId": 1,
+            "userId": "user4",
+            "bibNum": "bibnum3",
+            "reviewHeading": "good book",
+            "reviewRating": 4,
+            "reviewDescription": "rev des 1",
+            "recommend": "yes"
+        }
+    ]
+    
 @Injectable({
     providedIn: 'root'
 })
@@ -52,6 +126,12 @@ export class FakeBookService implements HttpInterceptor {
                     return getAllBooks();
                 case url.endsWith('/api/books/getTypes') && method === 'GET':
                         return getAllBookTypes();
+                case url.match(/\/api\/books\/getDetails\/.*$/) && method === 'GET':
+                            return getBookByBibnum();
+                case url.match(/api\/conditions\/get\/.*$/) && method === 'GET':
+                            return getConditionByBibNum();
+                case url.match(/api\/reviews\/get\/.*$/) && method === 'GET':
+                                return getReviewsByBibNum();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -61,17 +141,26 @@ export class FakeBookService implements HttpInterceptor {
         // route functions
 
         function getAllBooks() {
-
             return ok(books);
         }
         function getAllBookTypes(){
             return ok(categories);
         }
+        function getBookByBibnum(){
+        //console.log(books.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
+        return ok(books.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
+        }
+        function getConditionByBibNum(){
+            return ok(condition.filter(book => book.bibNum === getBibNumFromUrl()));
+        }
+        function getReviewsByBibNum(){
+            return ok(reviews.filter(book => book.bibNum === getBibNumFromUrl()));
+        }
         function get(){
             return ok(categories);
         }
         function getListOfCategories(){
-            return ok()
+            return ok()     
         }
 
 
@@ -91,6 +180,10 @@ export class FakeBookService implements HttpInterceptor {
 
         function isLoggedIn() {
             return headers.get('Authorization') === 'Bearer fake-jwt-token';
+        }
+        function getBibNumFromUrl(){
+            const urlParts = url.split('/');
+            return urlParts[urlParts.length-1];
         }
     }
 }

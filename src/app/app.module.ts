@@ -13,6 +13,9 @@ import { BookServiceService } from './book-service.service';
 import { DataTableModule } from 'angular5-data-table';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { BookDisplayComponent } from './book-display/book-display.component';
+import { NewConditionFormComponent } from './new-condition-form/new-condition-form.component';
+import { NewReviewFormComponent } from './new-review-form/new-review-form.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { HttpModule } from '@angular/http';
     AppComponent,
     BookListComponent,
     ReturnComponentComponent,
-    HomeComponent
+    HomeComponent,
+    BookDisplayComponent,
+    NewConditionFormComponent,
+    NewReviewFormComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +38,8 @@ import { HttpModule } from '@angular/http';
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'books', component: BookListComponent},
-      {path:'condition',component: ReturnComponentComponent}
+      {path:'condition',component: ReturnComponentComponent},
+      {path:'books/getDetails/:id',component:BookDisplayComponent}
     ])
   ],
   providers: [FakeBookProvider],
