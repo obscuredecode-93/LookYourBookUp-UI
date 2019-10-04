@@ -44,10 +44,10 @@ import { BookServiceService } from './book-service.service';
       {path: 'books', component: BookListComponent},
       {path:'books/getDetails/:id',component:BookDisplayComponent},
       {path:'books/newConditionForm',component:NewConditionFormComponent},
-      {path:'books/newReviewForm',component:NewReviewFormComponent} 
+      {path:'books/newReviewForm',component:NewReviewFormComponent}
     ])
   ],
-  providers: [FakeBookProvider,BookServiceService],
+  //providers: [FakeBookProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
