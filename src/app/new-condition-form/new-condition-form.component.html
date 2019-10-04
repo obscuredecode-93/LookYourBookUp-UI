@@ -1,3 +1,26 @@
-<p>
-  new-condition-form works!
-</p>
+<form #f="ngForm" (ngSubmit)="submit(f.value)" >  
+  <div class="form-group">
+    <label for="barcode">Barcode:</label>
+    <input type="text" class="form-control" id="barcode" name="barcode"  #barcode="ngModel" ngModel  placeholder="Enter barcode">
+  </div>
+  <div class="form-group">
+    <label for="bibNum">BibNum</label>
+    <input type="text" class="form-control" id="bibNum" name="bibNum" ngModel  placeholder="">
+  </div>
+  <div class="form-group">
+      <label for="bookCondition">Book Condition</label>
+    <select id="bookCondition" name="bookCondition" ngModel>
+      <option value=""></option>
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <label for="userId"></label>
+      <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
+  </div>
+  <button class="btn btn-primary">Submit</button>
+</form>

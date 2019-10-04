@@ -19,12 +19,18 @@ export class BookServiceService {
     return this.http.get<string[]>('/api/books/getTypes')
   }
   getBookByBibnum(bibnum){
-    return this.http.get<Book>('/api/books/getDetails/'+ bibnum)
+    return this.http.get<Book>('/api/books/getDetails/'+ bibnum);
   }
   getConditionByBibnum(bibnum){
-    return this.http.get<Condition[]>('api/conditions/get/'+ bibnum)
+    return this.http.get<Condition[]>('api/conditions/get/'+ bibnum);
   }
   getReviewsByBibnum(bibnum){
-    return this.http.get<Review[]>('api/reviews/get/'+ bibnum)
+    return this.http.get<Review[]>('api/reviews/get/'+ bibnum);
+  }
+  postConditions(condition){
+    return this.http.post('api/conditions/insert',condition);
+  }
+  postReviews(review){
+    return this.http.post('api/reviews/insert',review);
   }
 }

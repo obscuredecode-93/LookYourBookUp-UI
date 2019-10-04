@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
 import { BookDisplayComponent } from './book-display/book-display.component';
 import { NewConditionFormComponent } from './new-condition-form/new-condition-form.component';
 import { NewReviewFormComponent } from './new-review-form/new-review-form.component';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 
 
 @NgModule({
@@ -35,11 +36,14 @@ import { NewReviewFormComponent } from './new-review-form/new-review-form.compon
     HttpClientModule,
     HttpModule,
     DataTableModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'books', component: BookListComponent},
-      {path:'condition',component: ReturnComponentComponent},
-      {path:'books/getDetails/:id',component:BookDisplayComponent}
+      {path:'books/getDetails/:id',component:BookDisplayComponent},
+      {path:'books/newConditionForm',component:NewConditionFormComponent},
+      {path:'books/newReviewForm',component:NewReviewFormComponent} 
     ])
   ],
   providers: [FakeBookProvider],

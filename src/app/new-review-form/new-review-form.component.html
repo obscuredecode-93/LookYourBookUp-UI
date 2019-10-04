@@ -1,3 +1,19 @@
-<p>
-  new-review-form works!
-</p>
+<form #f="ngForm" (ngSubmit)="submit(f.value)" >  
+    <div class="form-group">
+      <label for="reviewId">Review Id:</label>
+      <input type="text" class="form-control" id="reviewId" name="reviewId"  #reviewId="ngModel" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="userId"></label>
+        <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="reviewRating"></label>
+        <input type="text" class="form-control" id="reviewRating" name="reviewRating"  placeholder="Enter review rating(out of 10)" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="reviewDescription"></label>
+        <input type="text" class="form-control" id="reviewDescription" name="reviewDescription"  placeholder="Enter review description" ngModel>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+  </form>

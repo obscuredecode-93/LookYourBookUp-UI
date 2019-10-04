@@ -132,6 +132,10 @@ export class FakeBookService implements HttpInterceptor {
                             return getConditionByBibNum();
                 case url.match(/api\/reviews\/get\/.*$/) && method === 'GET':
                                 return getReviewsByBibNum();
+                case url.endsWith('api/conditions/insert') && method === 'POST':
+                                return insertCondition();
+                case url.endsWith('api/reviews/insert') && method === 'POST':
+                                return insertReview();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -155,6 +159,16 @@ export class FakeBookService implements HttpInterceptor {
         }
         function getReviewsByBibNum(){
             return ok(reviews.filter(book => book.bibNum === getBibNumFromUrl()));
+        }
+        function insertReview(){
+            const newReview = body;
+            reviews.push(newReview);
+            return ok(true);
+        }
+        function insertCondition(){
+            const newCondition = body;
+            condition.push(newCondition);
+            return ok(true);
         }
         function get(){
             return ok(categories);

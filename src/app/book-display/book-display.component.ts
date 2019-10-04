@@ -28,6 +28,7 @@ export class BookDisplayComponent {
    constructor(private route: ActivatedRoute,private booksService:BookServiceService) { 
     let url =  route.snapshot.url
     this.bib_no = url[2].path;
+    localStorage.setItem("bib_no",this.bib_no);
     this.initializeValues();
    // console.log(this.bib_no);
   }
