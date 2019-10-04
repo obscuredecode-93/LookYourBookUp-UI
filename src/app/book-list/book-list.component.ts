@@ -15,12 +15,14 @@ export class BookListComponent {
   categories = [];
   items: Book[] = [];
   itemCount: number;
+  pageNumber:number = 1;
+  offset:number = 0;
   constructor(private booksService: BookServiceService) {
     this.displayBooks(); 
     this.populateCategoryDropDown();
   }
   async displayBooks(){
-    await this.booksService.getAll().subscribe(response => {
+    await this.booksService.getAll(this.pageNumber).subscribe(response => {
       this.books = response;
       this.initializeTable(this.books);
     },
@@ -30,18 +32,42 @@ export class BookListComponent {
   populateCategoryDropDown(){
     this.booksService.getAllCategories().subscribe(response => {
       response.forEach(category => this.categories.push(category));
-      console.log(this.categories);
     })
+  }
+  filterBooks({bookTitle, bookType,bookCondition}){
+    if(bookCondition === ""){
+      bookCondition="0";
+    }
+    this.booksService.searchBooks(bookTitle,bookType,bookCondition,this.pageNumber).subscribe((books) => {
+      this.books = books;
+      this.displayBooks();
+    });  
+
   }
 
   private initializeTable(books: Book[]){
     this.tableResource = new DataTableResource(books);
-    console.log(books);
     this.tableResource.query({ offset: 0 })
     .then(items => this.items = items);
     this.tableResource.count()
      .then(count => this.itemCount = count);
    }
+   reloadItems(params){
+    if(!this.tableResource) return;
+    console.log(this.pageNumber);
+    if(this.offset > params.offset){
+      this.pageNumber--;
+    }
+    else if(this.offset < params.offset){
+      this.pageNumber++;
+    }
+    this.offset = params.offset;
+    console.log(this.pageNumber);
+    this.displayBooks();
+   // this.pageNumber = this.tableResource
+    this.tableResource.query(params)
+    .then(items => this.items = items);
+  }
 
 
 }

@@ -1,8 +1,8 @@
 <div class="container">
-    <h1>{{ (book$| async).title }}</h1>
-    <p>{{ (book$ | async).subjects }}></p>
-    <p>{{ (book$ | async).type }}></p>
-    <p>{{ (book$ | async).bib_num }}></p>
+    <h1 id="title">{{ (book$| async).title }}</h1>
+    <p id="subjects">{{ (book$ | async).subjects }}</p>
+    <p id="">{{ (book$ | async).type }}</p>
+    <p id="">{{ (book$ | async).bib_num }}</p>
 </div>
 
 <h1>Condition:</h1>

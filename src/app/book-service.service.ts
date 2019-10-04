@@ -12,8 +12,8 @@ import {Review } from './models/Review';
 export class BookServiceService {
 
   constructor(private http:HttpClient) { }
-  getAll(){
-  	return this.http.get<Book[]>('/api/books')
+  getAll(pageNumber: number){
+  	return this.http.get<Book[]>('/api/books/'+ pageNumber)
   }
   getAllCategories(){
     return this.http.get<string[]>('/api/books/getTypes')
@@ -26,6 +26,16 @@ export class BookServiceService {
   }
   getReviewsByBibnum(bibnum){
     return this.http.get<Review[]>('api/reviews/get/'+ bibnum);
+  }
+  searchBooks(bookTitle,bookType,bookCondition, pageNumber){
+    return this.http.get<Book[]>('api/books/filterBooks',{
+      params:{
+        bookTitle: bookTitle,
+        bookType:bookType,
+        bookCondition: bookCondition,
+        pageNumber: pageNumber 
+      }
+    })
   }
   postConditions(condition){
     return this.http.post('api/conditions/insert',condition);

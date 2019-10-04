@@ -1,22 +1,24 @@
+/* App Module is where all the dependancies are declared */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
-
+import { RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BookListComponent } from './book-list/book-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ReturnComponentComponent } from './return-component/return-component.component';
-import { HomeComponent } from './home/home.component';
-import { FakeBookProvider } from './fakeBook.service';
-import { BookServiceService } from './book-service.service';
 import { DataTableModule } from 'angular5-data-table';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+
+
+import { BookListComponent } from './book-list/book-list.component';
+import { ReturnComponentComponent } from './return-component/return-component.component';
+import { HomeComponent } from './home/home.component';
 import { BookDisplayComponent } from './book-display/book-display.component';
 import { NewConditionFormComponent } from './new-condition-form/new-condition-form.component';
 import { NewReviewFormComponent } from './new-review-form/new-review-form.component';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+
+import { FakeBookProvider } from './fakeBook.service';
+import { BookServiceService } from './book-service.service';
 
 
 @NgModule({
@@ -34,7 +36,6 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    HttpModule,
     DataTableModule,
     FormsModule,
     ReactiveFormsModule,
@@ -46,7 +47,7 @@ import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
       {path:'books/newReviewForm',component:NewReviewFormComponent} 
     ])
   ],
-  providers: [FakeBookProvider],
+  providers: [FakeBookProvider,BookServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

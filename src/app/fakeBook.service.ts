@@ -1,10 +1,13 @@
+
+// Taken from - https://jasonwatmore.com/post/2019/05/02/angular-7-mock-backend-example-for-backendless-development
+
+
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-
 // array in local storage for registered users
-let books =  [
+let bookspageOne =  [
     {
         "title": "title1",
         "subjects": "subjects of 1,all subjects1",
@@ -22,6 +25,26 @@ let books =  [
         "subjects": "subjects of 3,all subjects3",
         "type": "cd",
         "bib_num": "bibnum3"
+    }
+]
+let bookspageTwo =  [
+    {
+        "title": "title4",
+        "subjects": "subjects of 1,all subjects1",
+        "type": "book",
+        "bib_num": "bibnum4"
+    },
+    {
+        "title": "title5",
+        "subjects": "subjects of 2 , all subjects2",
+        "type": "cd",
+        "bib_num": "bibnum5"
+    },
+    {
+        "title": "title6",
+        "subjects": "subjects of 3,all subjects3",
+        "type": "cd",
+        "bib_num": "bibnum6"
     }
 ]
 let categories = [
@@ -111,7 +134,7 @@ let condition =
 })
 export class FakeBookService implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const { url, method, headers, body } = request;
+        const { url, method, headers, body, params } = request;
 
         // wrap in delayed observable to simulate server api call
         return of(null)
@@ -122,7 +145,7 @@ export class FakeBookService implements HttpInterceptor {
 
         function handleRoute() {
             switch (true) {
-                case url.endsWith('/api/books') && method === 'GET':
+                case url.match(/\/api\/books\/\d+$/) && method === 'GET':
                     return getAllBooks();
                 case url.endsWith('/api/books/getTypes') && method === 'GET':
                         return getAllBookTypes();
@@ -131,11 +154,13 @@ export class FakeBookService implements HttpInterceptor {
                 case url.match(/api\/conditions\/get\/.*$/) && method === 'GET':
                             return getConditionByBibNum();
                 case url.match(/api\/reviews\/get\/.*$/) && method === 'GET':
-                                return getReviewsByBibNum();
+                            return getReviewsByBibNum();
                 case url.endsWith('api/conditions/insert') && method === 'POST':
-                                return insertCondition();
+                            return insertCondition();
                 case url.endsWith('api/reviews/insert') && method === 'POST':
-                                return insertReview();
+                            return insertReview();
+                case url.match(/filterBooks/) && method === 'GET':
+                            return filterBooks();  
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -143,16 +168,18 @@ export class FakeBookService implements HttpInterceptor {
         }
 
         // route functions
-
         function getAllBooks() {
-            return ok(books);
+            const pageNumber = getPageNumberFromUrl();
+            switch(pageNumber){
+                case 1: return ok(bookspageOne);
+                case 2: return ok(bookspageTwo);
+            }
         }
         function getAllBookTypes(){
             return ok(categories);
         }
         function getBookByBibnum(){
-        //console.log(books.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
-        return ok(books.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
+            return ok(bookspageOne.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
         }
         function getConditionByBibNum(){
             return ok(condition.filter(book => book.bibNum === getBibNumFromUrl()));
@@ -169,35 +196,32 @@ export class FakeBookService implements HttpInterceptor {
             const newCondition = body;
             condition.push(newCondition);
             return ok(true);
+        } 
+        function filterBooks(){
+            let filteredBooks = getFilterValueFromUrl();
+            return ok(filteredBooks);
         }
-        function get(){
-            return ok(categories);
-        }
-        function getListOfCategories(){
-            return ok()     
-        }
-
 
         // helper functions
-
         function ok(body?) {
             return of(new HttpResponse({ status: 200, body }))
-        }
-
-        function unauthorized() {
-            return throwError({ status: 401, error: { message: 'Unauthorised' } });
-        }
-
-        function error(message) {
-            return throwError({ error: { message } });
-        }
-
-        function isLoggedIn() {
-            return headers.get('Authorization') === 'Bearer fake-jwt-token';
         }
         function getBibNumFromUrl(){
             const urlParts = url.split('/');
             return urlParts[urlParts.length-1];
+        }
+        function getPageNumberFromUrl(){
+            const urlParts = url.split('/');
+            return parseInt(urlParts[urlParts.length-1]);
+        }
+        
+        function getFilterValueFromUrl(){
+            //const urlParts = url.split('/');
+            console.log(params);
+            switch(parseInt(params.get("pageNumber"))){
+                case 1: return bookspageOne;
+                case 2: return bookspageTwo;
+            }
         }
     }
 }
