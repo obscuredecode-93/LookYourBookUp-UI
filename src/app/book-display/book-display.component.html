@@ -1,13 +1,13 @@
 <div class="container">
     <h1 id="title">{{ (book$| async).title }}</h1>
     <p id="subjects">{{ (book$ | async).subjects }}</p>
-    <p id="">{{ (book$ | async).type }}</p>
-    <p id="">{{ (book$ | async).bib_num }}</p>
+    <p id="type">{{ (book$ | async).type }}</p>
+    <p id="bibNum">{{ (book$ | async).bib_num }}</p>
 </div>
 
 <h1>Condition:</h1>
 <div class="container">
-    <data-table 
+    <data-table
     [items]="items"
     [itemCount]="itemCount">
     <data-table-column
@@ -34,18 +34,12 @@
     [sortable] = "true"
     [resizable] = "true"
   ></data-table-column>
-    <!-- <data-table-column
-      [property] = "'bib_num'"
-      [header] = "'Bib_num'"
-      [sortable] = "true"
-      [resizable] = "true"
-    ></data-table-column> -->
     </data-table>
 </div>
 
 <hr/>
 <div class="container">
-    <data-table 
+    <data-table
     [items]="reviewItems"
     [itemCount]="reviewItemCount">
     <data-table-column
@@ -90,12 +84,6 @@
   [sortable] = "true"
   [resizable] = "true"
 ></data-table-column>
-    <!-- <data-table-column
-      [property] = "'bib_num'"
-      [header] = "'Bib_num'"
-      [sortable] = "true"
-      [resizable] = "true"
-    ></data-table-column> -->
     </data-table>
     <a class="btn btn-primary" href="books/newReviewForm">Add a review!</a>
 </div>

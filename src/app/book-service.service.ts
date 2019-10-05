@@ -11,36 +11,40 @@ import {Review } from './models/Review';
 })
 export class BookServiceService {
 
-  constructor(private http:HttpClient) { }
-  getAll(pageNumber: number){
-  	return this.http.get<Book[]>('http://localhost:8080/api/books/' + pageNumber)
+  constructor(private http: HttpClient) { }
+  getAll(pageNumber: number) {
+    // tslint:disable-next-line:indent
+  	return this.http.get<Book[]>('http://localhost:8080/api/books/' + pageNumber);
   }
-  getAllCategories(){
-    return this.http.get<string[]>('http://localhost:8080/api/books/getTypes')
+  getItemCount() {
+    return this.http.get<number>('http://localhost:8080/api/books/getTotalBookCount');
   }
-  getBookByBibnum(bibnum){
-    return this.http.get<Book>('http://localhost:8080/api/books/getDetails/'+ bibnum);
+  getAllCategories() {
+    return this.http.get<string[]>('http://localhost:8080/api/books/getTypes');
   }
-  getConditionByBibnum(bibnum){
-    return this.http.get<Condition[]>('http://localhost:8080/api/conditions/get/'+ bibnum);
+  getBookByBibnum(bibnum) {
+    return this.http.get<Book>('http://localhost:8080/api/books/getDetails/' + bibnum);
   }
-  getReviewsByBibnum(bibnum){
-    return this.http.get<Review[]>('http://localhost:8080/api/reviews/get/'+ bibnum);
+  getConditionByBibnum(bibnum) {
+    return this.http.get<Condition[]>('http://localhost:8080/api/conditions/get/' + bibnum);
   }
-  searchBooks(bookTitle,bookType,bookCondition, pageNumber){
-    return this.http.get<Book[]>('http://localhost:8080/api/books/filterBooks',{
-      params:{
-        bookTitle: bookTitle,
-        bookType:bookType,
-        bookCondition: bookCondition,
-        pageNumber: pageNumber
+  getReviewsByBibnum(bibnum) {
+    return this.http.get<Review[]>('http://localhost:8080/api/reviews/get/' + bibnum);
+  }
+  searchBooks(bookTitle, bookType, bookCondition, pageNumber) {
+    return this.http.get<Book[]>('http://localhost:8080/api/books/filterBooks', {
+      params: {
+        bookTitle,
+        bookType,
+        bookCondition,
+        pageNumber
       }
     });
   }
-  postConditions(condition){
+  postConditions(condition) {
     return this.http.post('http://localhost:8080/api/conditions/insert', condition);
   }
-  postReviews(review){
-    return this.http.post('api/reviews/insert', review);
+  postReviews(review) {
+    return this.http.post('http://localhost:8080/api/reviews/insert', review);
   }
 }

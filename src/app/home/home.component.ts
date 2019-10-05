@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router:Router) { }
-  
+  constructor(private router: Router) { }
+
   redirect = (url: string) => {
     this.router.navigateByUrl(url);
   }

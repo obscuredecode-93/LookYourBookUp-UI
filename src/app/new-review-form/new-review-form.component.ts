@@ -7,16 +7,15 @@ import { BookServiceService } from '../book-service.service';
 })
 export class NewReviewFormComponent {
 
-  constructor( private bookService:BookServiceService ) { }
+  constructor( private bookService: BookServiceService ) { }
 
-  submit(review){
-    review.bibNum = localStorage.getItem("bib_no")
+  submit(review) {
+    review.bibNum = localStorage.getItem('bib_no');
     this.bookService.postReviews(review).subscribe((response) => {
-      if(response){
-        console.log("Posted!");
-      }
-      else{
-        console.log("Could not post");
+      if (response) {
+        console.log('Posted!');
+      } else {
+        console.log('Could not post');
       }
     });
   }

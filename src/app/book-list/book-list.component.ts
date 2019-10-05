@@ -10,18 +10,21 @@ import { Book } from '../models/Book';
 })
 export class BookListComponent {
 
-  books : Book[];
+  books: Book[];
   tableResource: DataTableResource<Book>;
   categories = [];
   items: Book[] = [];
   itemCount: number;
-  pageNumber:number = 1;
-  offset:number = 0;
+  pageNumber = 1;
+  offset = 0;
   constructor(private booksService: BookServiceService) {
-    this.displayBooks(); 
+    this.displayBooks();
     this.populateCategoryDropDown();
+    this.booksService.getItemCount().subscribe((response) => {
+      this.itemCount = response;
+    });
   }
-  async displayBooks(){
+  async displayBooks() {
     await this.booksService.getAll(this.pageNumber).subscribe(response => {
       this.books = response;
       this.initializeTable(this.books);
@@ -29,36 +32,39 @@ export class BookListComponent {
     error => console.log(error));
   }
 
-  populateCategoryDropDown(){
+  populateCategoryDropDown() {
     this.booksService.getAllCategories().subscribe(response => {
       response.forEach(category => this.categories.push(category));
-    })
+    });
   }
-  filterBooks({bookTitle, bookType,bookCondition}){
-    if(bookCondition === ""){
-      bookCondition="0";
+  filterBooks({bookTitle, bookType, bookCondition}) {
+    if (bookCondition === '') {
+      bookCondition = '0';
     }
-    this.booksService.searchBooks(bookTitle,bookType,bookCondition,this.pageNumber).subscribe((books) => {
+    this.booksService.searchBooks(bookTitle, bookType, bookCondition, this.pageNumber).subscribe((books) => {
       this.books = books;
-      this.displayBooks();
-    });  
+      this.initializeTable(this.books);
+      // console.log(this.books);
+    });
 
   }
 
-  private initializeTable(books: Book[]){
+  private initializeTable(books: Book[]) {
     this.tableResource = new DataTableResource(books);
-    this.tableResource.query({ offset: 0 })
-    .then(items => this.items = items);
+    this.items = this.books;
+    console.log(this.books);
+    console.log(this.items);
+    // this.tableResource.query({ offset: 0 })
+    // .then(items => this.items = items);
     this.tableResource.count()
      .then(count => this.itemCount = count);
    }
-   reloadItems(params){
-    if(!this.tableResource) return;
+   reloadItems(params) {
+    if (!this.tableResource) { return; }
     console.log(this.pageNumber);
-    if(this.offset > params.offset){
+    if (this.offset > params.offset) {
       this.pageNumber--;
-    }
-    else if(this.offset < params.offset){
+    } else if (this.offset < params.offset) {
       this.pageNumber++;
     }
     this.offset = params.offset;

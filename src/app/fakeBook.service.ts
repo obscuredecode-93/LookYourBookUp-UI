@@ -7,128 +7,128 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 // array in local storage for registered users
-let bookspageOne =  [
+const bookspageOne =  [
     {
-        "title": "title1",
-        "subjects": "subjects of 1,all subjects1",
-        "type": "book",
-        "bib_num": "bibnum1"
+        title: 'title1',
+        subjects: 'subjects of 1,all subjects1',
+        type: 'book',
+        bib_num: 'bibnum1'
     },
     {
-        "title": "title2",
-        "subjects": "subjects of 2 , all subjects2",
-        "type": "cd",
-        "bib_num": "bibnum2"
+        title: 'title2',
+        subjects: 'subjects of 2 , all subjects2',
+        type: 'cd',
+        bib_num: 'bibnum2'
     },
     {
-        "title": "title3",
-        "subjects": "subjects of 3,all subjects3",
-        "type": "cd",
-        "bib_num": "bibnum3"
+        title: 'title3',
+        subjects: 'subjects of 3,all subjects3',
+        type: 'cd',
+        bib_num: 'bibnum3'
     }
-]
-let bookspageTwo =  [
+];
+const bookspageTwo =  [
     {
-        "title": "title4",
-        "subjects": "subjects of 1,all subjects1",
-        "type": "book",
-        "bib_num": "bibnum4"
+        title: 'title4',
+        subjects: 'subjects of 1,all subjects1',
+        type: 'book',
+        bib_num: 'bibnum4'
     },
     {
-        "title": "title5",
-        "subjects": "subjects of 2 , all subjects2",
-        "type": "cd",
-        "bib_num": "bibnum5"
+        title: 'title5',
+        subjects: 'subjects of 2 , all subjects2',
+        type: 'cd',
+        bib_num: 'bibnum5'
     },
     {
-        "title": "title6",
-        "subjects": "subjects of 3,all subjects3",
-        "type": "cd",
-        "bib_num": "bibnum6"
+        title: 'title6',
+        subjects: 'subjects of 3,all subjects3',
+        type: 'cd',
+        bib_num: 'bibnum6'
     }
-]
-let categories = [
-    "microfilm",
-    "book",
-    "dvd",
-    "cd-rom",
-    "cd"
-]
-let condition = 
+];
+const categories = [
+    'microfilm',
+    'book',
+    'dvd',
+    'cd-rom',
+    'cd'
+];
+const condition =
     [
         {
-            "barcode": "barcode1",
-            "bibNum": "bibnum1",
-            "bookCondition":   4,
-            "userId": "user1"
+            barcode: 'barcode1',
+            bibNum: 'bibnum1',
+            bookCondition:   4,
+            userId: 'user1'
         },
         {
-            "barcode": "barcode14",
-            "bibNum": "bibnum1",
-            "bookCondition": 2,
-            "userId": "user4"
+            barcode: 'barcode14',
+            bibNum: 'bibnum1',
+            bookCondition: 2,
+            userId: 'user4'
         },
         {
-            "barcode": "barcode14",
-            "bibNum": "bibnum2",
-            "bookCondition": 3,
-            "userId": "user4"
+            barcode: 'barcode14',
+            bibNum: 'bibnum2',
+            bookCondition: 3,
+            userId: 'user4'
         },
         {
-            "barcode": "barcode14",
-            "bibNum": "bibnum3",
-            "bookCondition": 3,
-            "userId": "user4"
+            barcode: 'barcode14',
+            bibNum: 'bibnum3',
+            bookCondition: 3,
+            userId: 'user4'
         }
-    ]
-    let reviews = [
+    ];
+const reviews = [
         {
-            "reviewId": 1,
-            "userId": "user4",
-            "bibNum": "bibnum3",
-            "reviewHeading": "good book",
-            "reviewRating": 4,
-            "reviewDescription": "rev des 1",
-            "recommend": "yes"
+            reviewId: 1,
+            userId: 'user4',
+            bibNum: 'bibnum3',
+            reviewHeading: 'good book',
+            reviewRating: 4,
+            reviewDescription: 'rev des 1',
+            recommend: 'yes'
         },
         {
-            "reviewId": 1,
-            "userId": "user4",
-            "bibNum": "bibnum3",
-            "reviewHeading": "good book",
-            "reviewRating": 4,
-            "reviewDescription": "rev des 1",
-            "recommend": "yes"
+            reviewId: 1,
+            userId: 'user4',
+            bibNum: 'bibnum3',
+            reviewHeading: 'good book',
+            reviewRating: 4,
+            reviewDescription: 'rev des 1',
+            recommend: 'yes'
         },
         {
-            "reviewId": 1,
-            "userId": "user2",
-            "bibNum": "bibnum2",
-            "reviewHeading": "good book",
-            "reviewRating": 4,
-            "reviewDescription": "rev des 1",
-            "recommend": "yes"
+            reviewId: 1,
+            userId: 'user2',
+            bibNum: 'bibnum2',
+            reviewHeading: 'good book',
+            reviewRating: 4,
+            reviewDescription: 'rev des 1',
+            recommend: 'yes'
         },
         {
-            "reviewId": 1,
-            "userId": "user1",
-            "bibNum": "bibnum1",
-            "reviewHeading": "good book",
-            "reviewRating": 4,
-            "reviewDescription": "rev des 1",
-            "recommend": "yes"
+            reviewId: 1,
+            userId: 'user1',
+            bibNum: 'bibnum1',
+            reviewHeading: 'good book',
+            reviewRating: 4,
+            reviewDescription: 'rev des 1',
+            recommend: 'yes'
         },
         {
-            "reviewId": 1,
-            "userId": "user4",
-            "bibNum": "bibnum3",
-            "reviewHeading": "good book",
-            "reviewRating": 4,
-            "reviewDescription": "rev des 1",
-            "recommend": "yes"
+            reviewId: 1,
+            userId: 'user4',
+            bibNum: 'bibnum3',
+            reviewHeading: 'good book',
+            reviewRating: 4,
+            reviewDescription: 'rev des 1',
+            recommend: 'yes'
         }
-    ]
-    
+    ];
+
 @Injectable({
     providedIn: 'root'
 })
@@ -139,7 +139,8 @@ export class FakeBookService implements HttpInterceptor {
         // wrap in delayed observable to simulate server api call
         return of(null)
             .pipe(mergeMap(handleRoute))
-            .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+            .pipe(materialize())
+            // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
             .pipe(delay(500))
             .pipe(dematerialize());
 
@@ -160,7 +161,7 @@ export class FakeBookService implements HttpInterceptor {
                 case url.endsWith('api/reviews/insert') && method === 'POST':
                             return insertReview();
                 case url.match(/filterBooks/) && method === 'GET':
-                            return filterBooks();  
+                            return filterBooks();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -170,55 +171,55 @@ export class FakeBookService implements HttpInterceptor {
         // route functions
         function getAllBooks() {
             const pageNumber = getPageNumberFromUrl();
-            switch(pageNumber){
+            switch (pageNumber) {
                 case 1: return ok(bookspageOne);
                 case 2: return ok(bookspageTwo);
             }
         }
-        function getAllBookTypes(){
+        function getAllBookTypes() {
             return ok(categories);
         }
-        function getBookByBibnum(){
+        function getBookByBibnum() {
             return ok(bookspageOne.filter(book => book.bib_num == getBibNumFromUrl().valueOf())[0]);
         }
-        function getConditionByBibNum(){
+        function getConditionByBibNum() {
             return ok(condition.filter(book => book.bibNum === getBibNumFromUrl()));
         }
-        function getReviewsByBibNum(){
+        function getReviewsByBibNum() {
             return ok(reviews.filter(book => book.bibNum === getBibNumFromUrl()));
         }
-        function insertReview(){
+        function insertReview() {
             const newReview = body;
             reviews.push(newReview);
             return ok(true);
         }
-        function insertCondition(){
+        function insertCondition() {
             const newCondition = body;
             condition.push(newCondition);
             return ok(true);
-        } 
-        function filterBooks(){
-            let filteredBooks = getFilterValueFromUrl();
+        }
+        function filterBooks() {
+            const filteredBooks = getFilterValueFromUrl();
             return ok(filteredBooks);
         }
 
         // helper functions
         function ok(body?) {
-            return of(new HttpResponse({ status: 200, body }))
+            return of(new HttpResponse({ status: 200, body }));
         }
-        function getBibNumFromUrl(){
+        function getBibNumFromUrl() {
             const urlParts = url.split('/');
-            return urlParts[urlParts.length-1];
+            return urlParts[urlParts.length - 1];
         }
-        function getPageNumberFromUrl(){
+        function getPageNumberFromUrl() {
             const urlParts = url.split('/');
-            return parseInt(urlParts[urlParts.length-1]);
+            return parseInt(urlParts[urlParts.length - 1]);
         }
-        
-        function getFilterValueFromUrl(){
-            //const urlParts = url.split('/');
+
+        function getFilterValueFromUrl() {
+            // const urlParts = url.split('/');
             console.log(params);
-            switch(parseInt(params.get("pageNumber"))){
+            switch (parseInt(params.get('pageNumber'))) {
                 case 1: return bookspageOne;
                 case 2: return bookspageTwo;
             }

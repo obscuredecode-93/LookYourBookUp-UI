@@ -1,19 +1,27 @@
-<form #f="ngForm" (ngSubmit)="submit(f.value)" >  
+<form #f="ngForm" (ngSubmit)="submit(f.value)" >
     <div class="form-group">
       <label for="reviewId">Review Id:</label>
       <input type="text" class="form-control" id="reviewId" name="reviewId"  #reviewId="ngModel" ngModel>
     </div>
     <div class="form-group">
-        <label for="userId"></label>
+        <label for="userId">User Id</label>
         <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
     </div>
     <div class="form-group">
-        <label for="reviewRating"></label>
+        <label for="reviewRating">Rating</label>
         <input type="text" class="form-control" id="reviewRating" name="reviewRating"  placeholder="Enter review rating(out of 10)" ngModel>
     </div>
     <div class="form-group">
-        <label for="reviewDescription"></label>
-        <input type="text" class="form-control" id="reviewDescription" name="reviewDescription"  placeholder="Enter review description" ngModel>
+        <label for="reviewHeading">Heading</label>
+        <input type="text" class="form-control" id="reviewHeading" name="reviewHeading"  placeholder="Enter review heading" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="reviewDescription">Description</label>
+      <input type="text" class="form-control" id="reviewDescription" name="reviewDescription"  placeholder="Enter review description" ngModel>
+    </div>
+    <div class="form-group">
+      <label for="recommend"></label>
+      <input type="text" class="form-control" id="recommend" name="recommend"  placeholder="Recommendation" ngModel>
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>

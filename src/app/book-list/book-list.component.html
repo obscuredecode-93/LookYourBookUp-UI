@@ -18,11 +18,11 @@
     </form>
 </div>
 
-<data-table 
+<data-table
 title="Books Table"
 [showTitle]="true"
 [items]="items"
-[itemCount]="100"
+[itemCount]="itemCount"
 ([page])="pageNumber"
 (reload)="reloadItems($event)">
 <data-table-column

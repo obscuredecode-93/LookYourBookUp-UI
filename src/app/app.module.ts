@@ -7,17 +7,12 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableModule } from 'angular5-data-table';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
-
-
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { BookListComponent } from './book-list/book-list.component';
-import { ReturnComponentComponent } from './return-component/return-component.component';
 import { HomeComponent } from './home/home.component';
 import { BookDisplayComponent } from './book-display/book-display.component';
 import { NewConditionFormComponent } from './new-condition-form/new-condition-form.component';
 import { NewReviewFormComponent } from './new-review-form/new-review-form.component';
-
-import { FakeBookProvider } from './fakeBook.service';
 import { BookServiceService } from './book-service.service';
 
 
@@ -25,7 +20,6 @@ import { BookServiceService } from './book-service.service';
   declarations: [
     AppComponent,
     BookListComponent,
-    ReturnComponentComponent,
     HomeComponent,
     BookDisplayComponent,
     NewConditionFormComponent,
@@ -42,12 +36,12 @@ import { BookServiceService } from './book-service.service';
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'books', component: BookListComponent},
-      {path:'books/getDetails/:id',component:BookDisplayComponent},
-      {path:'books/newConditionForm',component:NewConditionFormComponent},
-      {path:'books/newReviewForm',component:NewReviewFormComponent}
+      {path: 'books/getDetails/:id', component: BookDisplayComponent},
+      {path: 'books/newConditionForm', component: NewConditionFormComponent},
+      {path: 'books/newReviewForm', component: NewReviewFormComponent}
     ])
   ],
-  //providers: [FakeBookProvider],
+  providers: [BookServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
