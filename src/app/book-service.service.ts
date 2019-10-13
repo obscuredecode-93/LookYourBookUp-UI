@@ -41,6 +41,15 @@ export class BookServiceService {
       }
     });
   }
+  getFilteredCount(bookTitle, bookType, bookCondition) {
+    return this.http.get<number>('http://localhost:8080/api/books/filterBooksCount', {
+      params: {
+        bookTitle,
+        bookType,
+        bookCondition
+      }
+    });
+  }
   postConditions(condition) {
     return this.http.post('http://localhost:8080/api/conditions/insert', condition);
   }

@@ -1,19 +1,26 @@
 <div  class="container">
+  <br />
     <form (ngSubmit)="filterBooks(f.value)" #f="ngForm" >
         <div class="form-group" class="searchForm">
-            <input type="text" class="form-control" ngModel ng-init="bookTitle =''" id="bookTitle" name="bookTitle" placeholder="Enter title" />
-            <select class="form-control" name="bookType" id="bookType" ng-init="bookType=''" ngModel>
+          <label> Enter parts of title to search: </label>
+          <input type="text" class="form-control" ngModel ng-init="bookTitle =''" id="bookTitle" name="bookTitle" placeholder="Enter title" />
+
+          <label> Select among top book types: </label>
+          <select class="form-control" name="bookType" id="bookType" ng-init="bookType=''" ngModel>
                 <option *ngFor="let category of categories" [value]="category" > {{ category }} </option>
-            </select>
-            <select #bookCondition="ngModel" class="form-control" ngModel name="bookCondition" id="bookCondition" ng-init="bookCondition ='0'" >
-              <option [value]="0"></option>
-              <option [value]="5">5</option>
-              <option [value]="4">4</option>
-              <option [value]="3">3</option>
-              <option [value]="2">2</option>
-              <option [value]="1">1</option>
-            </select>
-            <input class="form-control" type="submit" class="btn btn-primary" />
+          </select>
+
+          <label> Select book condition: </label>
+          <select #bookCondition="ngModel" class="form-control" ngModel name="bookCondition" id="bookCondition" ng-init="bookCondition ='0'" >
+                <option [value]="0"></option>
+                <option [value]="5">5</option>
+                <option [value]="4">4</option>
+                <option [value]="3">3</option>
+                <option [value]="2">2</option>
+                <option [value]="1">1</option>
+          </select>
+          <br />
+          <input class="form-control" type="submit" class="btn btn-primary" />
           </div>
     </form>
 </div>
@@ -22,9 +29,12 @@
 title="Books Table"
 [showTitle]="true"
 [items]="items"
-[itemCount]="itemCount"
-([page])="pageNumber"
-(reload)="reloadItems($event)">
+[itemCount]="booksCount"
+[pagination]="true"
+[pageLimits]="[10]"
+[page]="pageNumber"
+(reload)="reloadItems($event)"
+>
 <data-table-column
   [property] = "'title'"
   [header] = "'Title'"
@@ -44,7 +54,9 @@ title="Books Table"
   [resizable] = "true"
 ></data-table-column>
 <data-table-column
-[property]="'bib_num'">
+[property]="'bib_num'"
+[header] = "'Biblical Number'"
+>
     <ng-template #dataTableCell let-item="item">
         <a [routerLink]="['/books/getDetails/', item.bib_num]">{{ item.bib_num }}</a>
     </ng-template>

@@ -9,22 +9,23 @@ import { Book } from '../models/Book';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent {
-
   books: Book[];
   tableResource: DataTableResource<Book>;
   categories = [];
   items: Book[] = [];
-  itemCount: number;
+  booksCount: number;
   pageNumber = 1;
   offset = 0;
+
   constructor(private booksService: BookServiceService) {
     this.displayBooks();
     this.populateCategoryDropDown();
-    this.booksService.getItemCount().subscribe((response) => {
-      this.itemCount = response;
-    });
   }
+
   async displayBooks() {
+    this.booksService.getItemCount().subscribe((response) => {
+      this.booksCount = response;
+    });
     await this.booksService.getAll(this.pageNumber).subscribe(response => {
       this.books = response;
       this.initializeTable(this.books);
@@ -37,16 +38,18 @@ export class BookListComponent {
       response.forEach(category => this.categories.push(category));
     });
   }
+
   filterBooks({bookTitle, bookType, bookCondition}) {
     if (bookCondition === '') {
       bookCondition = '0';
     }
+    this.booksService.getFilteredCount(bookTitle, bookType, bookCondition).subscribe((response) => {
+      this.booksCount = response;
+    });
     this.booksService.searchBooks(bookTitle, bookType, bookCondition, this.pageNumber).subscribe((books) => {
       this.books = books;
       this.initializeTable(this.books);
-      // console.log(this.books);
     });
-
   }
 
   private initializeTable(books: Book[]) {
@@ -54,11 +57,8 @@ export class BookListComponent {
     this.items = this.books;
     console.log(this.books);
     console.log(this.items);
-    // this.tableResource.query({ offset: 0 })
-    // .then(items => this.items = items);
-    this.tableResource.count()
-     .then(count => this.itemCount = count);
    }
+
    reloadItems(params) {
     if (!this.tableResource) { return; }
     console.log(this.pageNumber);
@@ -74,6 +74,4 @@ export class BookListComponent {
     this.tableResource.query(params)
     .then(items => this.items = items);
   }
-
-
 }
