@@ -21,3 +21,10 @@
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>
+
+<ng-template *ngIf="success">
+  Your entry has been added
+</ng-template>
+<ng-template *ngIf="!success">
+  Sorry your entry could not be added
+</ng-template>

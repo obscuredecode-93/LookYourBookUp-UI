@@ -6,7 +6,7 @@ import { BookServiceService } from '../book-service.service';
   styleUrls: ['./new-review-form.component.scss']
 })
 export class NewReviewFormComponent {
-
+  success:boolean;
   constructor( private bookService: BookServiceService ) { }
 
   submit(review) {

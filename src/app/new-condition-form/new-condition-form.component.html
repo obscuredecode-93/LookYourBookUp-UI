@@ -19,4 +19,11 @@
       <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
   </div>
   <button class="btn btn-primary">Submit</button>
+
+  <ng-template *ngIf="success">
+    Your entry has been added
+  </ng-template>
+  <ng-template *ngIf="!success">
+      Sorry your entry could not be added
+    </ng-template>
 </form>
