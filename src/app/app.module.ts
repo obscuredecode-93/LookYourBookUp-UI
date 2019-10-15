@@ -14,6 +14,7 @@ import { BookDisplayComponent } from './book-display/book-display.component';
 import { NewConditionFormComponent } from './new-condition-form/new-condition-form.component';
 import { NewReviewFormComponent } from './new-review-form/new-review-form.component';
 import { BookServiceService } from './book-service.service';
+import { ConditionReportComponent } from './condition-report/condition-report.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { BookServiceService } from './book-service.service';
     HomeComponent,
     BookDisplayComponent,
     NewConditionFormComponent,
-    NewReviewFormComponent
+    NewReviewFormComponent,
+    ConditionReportComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,8 @@ import { BookServiceService } from './book-service.service';
       {path: 'books', component: BookListComponent},
       {path: 'books/getDetails/:id', component: BookDisplayComponent},
       {path: 'books/newConditionForm', component: NewConditionFormComponent},
-      {path: 'books/newReviewForm', component: NewReviewFormComponent}
+      {path: 'books/newReviewForm', component: NewReviewFormComponent},
+      {path: 'books/conditionReport', component: ConditionReportComponent}
     ])
   ],
   providers: [BookServiceService],

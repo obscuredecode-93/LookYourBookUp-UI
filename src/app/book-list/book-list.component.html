@@ -7,17 +7,18 @@
 
           <label> Select among top book types: </label>
           <select class="form-control" name="bookType" id="bookType" ng-init="bookType=''" ngModel>
+                <option value=""></option>
                 <option *ngFor="let category of categories" [value]="category" > {{ category }} </option>
           </select>
 
           <label> Select book condition: </label>
           <select #bookCondition="ngModel" class="form-control" ngModel name="bookCondition" id="bookCondition" ng-init="bookCondition ='0'" >
                 <option [value]="0"></option>
-                <option [value]="5">5</option>
-                <option [value]="4">4</option>
-                <option [value]="3">3</option>
-                <option [value]="2">2</option>
-                <option [value]="1">1</option>
+                <option [value]="5">Very Good</option>
+                <option [value]="4">Good</option>
+                <option [value]="3">Okay</option>
+                <option [value]="2">Bad</option>
+                <option [value]="1">Very Bad</option>
           </select>
           <br />
           <input class="form-control" type="submit" class="btn btn-primary" />

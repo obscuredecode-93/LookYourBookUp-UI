@@ -1,29 +1,53 @@
 <form #f="ngForm" (ngSubmit)="f.form.valid && submit(f.value)" >
     <div class="form-group">
         <label for="userId">User Id</label>
-        <input type="text" class="form-control" id="userId" name="userId" required placeholder="Enter User Id" ngModel>
+        <input type="text" class="form-control" id="userId" name="userId" #userId="ngModel" required placeholder="Enter User Id" ngModel>
         <div *ngIf="userId.invalid && f.submitted"
           class="alert alert-danger">
         <div *ngIf="userId.errors?.required">
-            Barcode is required.
+            UserId is required.
         </div>
       </div>
     </div>
     <div class="form-group">
         <label for="reviewRating">Rating</label>
-        <input type="text" class="form-control" id="reviewRating" name="reviewRating"  placeholder="Enter review rating(out of 10)" ngModel>
+        <input type="text" class="form-control" id="reviewRating" required name="reviewRating" #rating="ngModel"  placeholder="Enter review rating(out of 10)" ngModel>
+        <div *ngIf="rating.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="rating.errors?.required">
+            Rating is required.
+        </div>
+      </div>
     </div>
     <div class="form-group">
         <label for="reviewHeading">Heading</label>
-        <input type="text" class="form-control" id="reviewHeading" name="reviewHeading"  placeholder="Enter review heading" ngModel>
+        <input type="text" class="form-control" id="reviewHeading" required #reviewHeading="ngModel" name="reviewHeading"  placeholder="Enter review heading" ngModel>
+        <div *ngIf="reviewHeading.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="reviewHeading.errors?.required">
+            Review Heading is required.
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="reviewDescription">Description</label>
-      <input type="text" class="form-control" id="reviewDescription" name="reviewDescription"  placeholder="Enter review description" ngModel>
+      <input type="text" class="form-control" id="reviewDescription" required #reviewDescription="ngModel" name="reviewDescription"  placeholder="Enter review description" ngModel>
+      <div *ngIf="reviewDescription.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="reviewDescription.errors?.required">
+            Review Description is required.
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="recommend"></label>
-      <input type="text" class="form-control" id="recommend" name="recommend"  placeholder="Recommendation" ngModel>
+      <input type="text" class="form-control" id="recommend" name="recommend" required #recommend="ngModel"  placeholder="Recommendation" ngModel>
+      <div *ngIf="recommend.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="recommend.errors?.required">
+            Recommendation is required.
+        </div>
+      </div>
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>
