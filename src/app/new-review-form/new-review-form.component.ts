@@ -12,11 +12,17 @@ export class NewReviewFormComponent {
   submit(review) {
     review.bibNum = localStorage.getItem('bib_no');
     this.bookService.postReviews(review).subscribe((response) => {
-      if (response) {
-        console.log('Posted!');
-      } else {
-        console.log('Could not post');
+      if(response){
+        this.success = true;
+        alert("Message inserted");
       }
+      else{
+        this.success = false;
+        alert("Error")
+      }
+    },
+    (error) => {
+      console.log(error);
     });
   }
 }

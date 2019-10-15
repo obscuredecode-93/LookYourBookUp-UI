@@ -1,29 +1,81 @@
-<form #f="ngForm" (ngSubmit)="submit(f.value)" >
+<form #f="ngForm" (ngSubmit)="f.form.valid && submit(f.value)" novalidate>
   <div class="form-group">
     <label for="barcode">Barcode:</label>
-    <input type="text" class="form-control" id="barcode" name="barcode"  #barcode="ngModel" ngModel  placeholder="Enter barcode">
+    <input type="text" class="form-control" id="barcode" name="barcode"  #barcode="ngModel" ngModel required   placeholder="Enter barcode">
+    <div *ngIf="barcode.invalid && f.submitted"
+    class="alert alert-danger">
+    <div *ngIf="barcode.errors?.required">
+        Barcode is required.
+      </div>
+    </div>
   </div>
   <div class="form-group">
       <label for="bookCondition">Book Condition</label>
-    <select id="bookCondition" name="bookCondition" ngModel>
-      <option value=""></option>
-      <option value="5">5</option>
-      <option value="4">4</option>
-      <option value="3">3</option>
-      <option value="2">2</option>
-      <option value="1">1</option>
+    <select id="bookCondition" name="bookCondition" ngModel required>
+        <option value=""></option>
+        <option value="5">Very Good</option>
+        <option value="4">Good</option>
+        <option value="3">Okay</option>
+        <option value="2">Bad</option>
+        <option value="1">Very Bad</option>
+        <div *ngIf="bookCondition.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="bookCondition.errors?.required">
+            Book Condition is required.
+          </div>
+        </div>
     </select>
   </div>
   <div class="form-group">
       <label for="userId"></label>
-      <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
+      <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel required>
+      <div *ngIf="userId?.invalid && f.submitted"
+        class="alert alert-danger">
+        <div *ngIf="userId.errors?.required">
+            userId is required.
+          </div>
+        </div>
   </div>
   <button class="btn btn-primary">Submit</button>
-
-  <ng-template *ngIf="success">
-    Your entry has been added
-  </ng-template>
-  <ng-template *ngIf="!success">
-      Sorry your entry could not be added
-    </ng-template>
 </form>
+
+<div class="container">
+  <select class="form-control" [(ngModel)] = "reportCondition">
+    <option value=""></option>
+    <option value="5">Very Good</option>
+    <option value="4">Good</option>
+    <option value="3">Okay</option>
+    <option value="2">Bad</option>
+    <option value="1">Very Bad</option>
+  </select>
+  <button class="btn btn-secondary" (click)="getReport()">Get Report</button>
+
+  <data-table
+    [items]="bookConditions"
+    [itemCount]="bookCount">
+    <data-table-column
+      [property] = "'barcode'"
+      [header] = "'Barcode'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'bibNum'"
+      [header] = "'bibNum'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+      [property] = "'bookCondition'"
+      [header] = "'bookCondition'"
+      [sortable] = "true"
+      [resizable] = "true"
+    ></data-table-column>
+    <data-table-column
+    [property] = "'userId'"
+    [header] = "'userId'"
+    [sortable] = "true"
+    [resizable] = "true"
+  ></data-table-column>
+    </data-table>
+</div>

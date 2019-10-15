@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookServiceService } from '../book-service.service';
+import { DataTableResource } from 'angular5-data-table';
+import { Condition } from '../models/Condition';
 
 @Component({
   selector: 'app-new-condition-form',
@@ -8,6 +10,10 @@ import { BookServiceService } from '../book-service.service';
 })
 export class NewConditionFormComponent {
   success:boolean;
+  reportCondition: string;
+  conditionTableResource: DataTableResource<Condition>;
+  bookConditions:Condition[] = [];
+  bookCount:number = 0;
   constructor( private bookservice: BookServiceService ) { }
 
   submit(condition) {
@@ -24,5 +30,17 @@ export class NewConditionFormComponent {
       console.log('Insert not successful');
       this.success = false;
     });
+  }
+  
+  getReport(){
+    if (this.reportCondition === '') {
+      this.reportCondition = '0';
+    }
+    this.bookservice.getReport(this.reportCondition).subscribe((response) => {
+      this.bookConditions = response.bookConditions;
+      this.bookCount = response.bookCount;
+      this.conditionTableResource = new DataTableResource(this.bookConditions); 
+    });
+
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookListComponent } from './book-list/book-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,9 @@ import { BookListComponent } from './book-list/book-list.component';
 })
 export class AppComponent {
   title = 'BooksApp';
-    constructor() {
-    }
+  constructor(private router: Router) { }
+
+  redirect = (url: string) => {
+    this.router.navigateByUrl(url);
+  }
 }
