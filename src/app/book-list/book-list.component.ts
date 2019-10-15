@@ -43,9 +43,15 @@ export class BookListComponent {
     if (bookCondition === '') {
       bookCondition = '0';
     }
-    this.booksService.getFilteredCount(bookTitle, bookType, bookCondition).subscribe((response) => {
-      this.booksCount = response;
-    });
+    if (bookTitle === '' && bookType === '' && bookCondition === '0') {
+      this.booksService.getItemCount().subscribe((response) => {
+        this.booksCount = response;
+      });
+    } else {
+      this.booksService.getFilteredCount(bookTitle, bookType, bookCondition).subscribe((response) => {
+        this.booksCount = response;
+      });
+    }
     this.booksService.searchBooks(bookTitle, bookType, bookCondition, this.pageNumber).subscribe((books) => {
       this.books = books;
       this.initializeTable(this.books);

@@ -23,7 +23,7 @@ export class BookServiceService {
     return this.http.get<string[]>('http://localhost:8080/api/books/getTypes');
   }
   getReport(condition) {
-    return this.http.get<any>('http://localhost:8080/api/books/getReport/' + condition);
+    return this.http.get<any>('http://localhost:8080/api/conditions/getReport/' + condition);
   }
   getBookByBibnum(bibnum) {
     return this.http.get<Book>('http://localhost:8080/api/books/getDetails/' + bibnum);
