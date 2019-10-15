@@ -1,7 +1,13 @@
-<form #f="ngForm" (ngSubmit)="submit(f.value)" >
+<form #f="ngForm" (ngSubmit)="f.form.valid && submit(f.value)" >
     <div class="form-group">
         <label for="userId">User Id</label>
-        <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel>
+        <input type="text" class="form-control" id="userId" name="userId" required placeholder="Enter User Id" ngModel>
+        <div *ngIf="userId.invalid && f.submitted"
+          class="alert alert-danger">
+        <div *ngIf="userId.errors?.required">
+            Barcode is required.
+        </div>
+      </div>
     </div>
     <div class="form-group">
         <label for="reviewRating">Rating</label>

@@ -33,13 +33,16 @@ export class NewConditionFormComponent {
   }
   
   getReport(){
-    if (this.reportCondition === '') {
+    if (this.reportCondition === '' || this.reportCondition == undefined) {
       this.reportCondition = '0';
     }
     this.bookservice.getReport(this.reportCondition).subscribe((response) => {
       this.bookConditions = response.bookConditions;
       this.bookCount = response.bookCount;
       this.conditionTableResource = new DataTableResource(this.bookConditions); 
+    },
+    (error) => {
+      alert("You got error! Please try again");
     });
 
   }

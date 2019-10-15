@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
       <label for="bookCondition">Book Condition</label>
-    <select id="bookCondition" name="bookCondition" ngModel required>
+    <select id="bookCondition" name="bookCondition" #bookCondition="ngModel" ngModel required>
         <option value=""></option>
         <option value="5">Very Good</option>
         <option value="4">Good</option>
@@ -28,8 +28,8 @@
   </div>
   <div class="form-group">
       <label for="userId"></label>
-      <input type="text" class="form-control" id="userId" name="userId"  placeholder="Enter User Id" ngModel required>
-      <div *ngIf="userId?.invalid && f.submitted"
+      <input type="text" class="form-control" id="userId" name="userId" #userId="ngModel"  placeholder="Enter User Id" ngModel required>
+      <div *ngIf="userId.invalid && f.submitted"
         class="alert alert-danger">
         <div *ngIf="userId.errors?.required">
             userId is required.
@@ -40,8 +40,7 @@
 </form>
 
 <div class="container">
-  <select class="form-control" [(ngModel)] = "reportCondition">
-    <option value=""></option>
+  <select class="form-control" [(ngModel)] = "reportCondition" required>
     <option value="5">Very Good</option>
     <option value="4">Good</option>
     <option value="3">Okay</option>
